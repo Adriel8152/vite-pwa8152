@@ -20,7 +20,7 @@ export default defineConfig({
         runtimeCaching: [{
           handler: 'NetworkOnly',
           urlPattern: /\/api\/.*\/*.json/,
-          method: 'POST',
+          method: 'GET',
           options: {
             backgroundSync: {
               name: 'myQueueName',
