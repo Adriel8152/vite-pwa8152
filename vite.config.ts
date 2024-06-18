@@ -18,14 +18,28 @@ export default defineConfig({
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
         runtimeCaching: [{
-          handler: 'NetworkOnly',
-          urlPattern: /\/api\/.*\/*.json/,
+          handler: 'StaleWhileRevalidate',
+          urlPattern: /\/api\/.*\//,
           method: 'GET',
           options: {
             backgroundSync: {
-              name: 'myQueueName',
+              name: 'getQueueName',
               options: {
                 maxRetentionTime: 24 * 60
+              }
+            }
+          }
+        },
+        {
+          // Nueva configuración para peticiones POST
+          urlPattern: /\/api\/.*\//, // Ajusta este patrón a tus necesidades
+          method: 'POST',
+          handler: 'NetworkOnly',
+          options: {
+            backgroundSync: {
+              name: 'postQueueName', // Este nombre debe ser único
+              options: {
+                maxRetentionTime: 24 * 60 // En minutos
               }
             }
           }
