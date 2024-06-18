@@ -5,11 +5,12 @@ export const useHttpService = () => {
 		return fetch(`${API_PATH?.endsWith('/') ? API_PATH : API_PATH + '/'}${url.startsWith('/') ? url.slice(1) : url }`, options);
 	};
 
-	const post = ( url: string, body: any, options: RequestInit | undefined = { method: 'post', body: JSON.stringify( body ) } ) => {
+	const post = ( url: string, options: RequestInit | undefined = { method: 'post' } ) => {
 		return fetch(`${API_PATH?.endsWith('/') ? API_PATH : API_PATH + '/'}${url.startsWith('/') ? url.slice(1) : url }`, options);
 	};
 
 	return {
 		get,
+		post
 	}
 }

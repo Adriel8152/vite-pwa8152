@@ -1,7 +1,7 @@
 import { useHttpService } from "./useHttpService"
 
 export const useTodos = () => {
-	const { get } = useHttpService();
+	const { get, post } = useHttpService();
 	
 	const getAllTodos = async () => {
 		const resp = await get( '/getTodos', { method: 'get' } );
@@ -11,7 +11,7 @@ export const useTodos = () => {
 	}
 
 	const addTodo = async ( title: string ) => {
-		const resp = await get( '/addTodo', {
+		const resp = await post( '/addTodo', {
 			method: 'post',
 			headers: {
 				"Content-Type": "application/JSON"
