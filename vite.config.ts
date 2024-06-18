@@ -19,7 +19,7 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
         runtimeCaching: [{
           handler: 'StaleWhileRevalidate',
-          urlPattern: /\/api\/.*\//,
+          urlPattern: /.*\/api\/.*/,
           method: 'GET',
           options: {
             backgroundSync: {
@@ -32,7 +32,7 @@ export default defineConfig({
         },
         {
           // Nueva configuración para peticiones POST
-          urlPattern: /\/api\/.*\//, // Ajusta este patrón a tus necesidades
+          urlPattern: /.*\/api\/.*/, // Ajusta este patrón a tus necesidades
           method: 'POST',
           handler: 'NetworkOnly',
           options: {
