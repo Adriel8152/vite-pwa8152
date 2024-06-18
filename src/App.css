@@ -1,7 +1,9 @@
 #root {
   max-width: 1280px;
+  min-width: 100vw;
+  min-height: 100vh;
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   text-align: center;
 }
 
@@ -16,6 +18,29 @@
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.table {
+  border-collapse: separate;
+  border-spacing: 4px 8px;
+  /* width: 100%; */
+}
+
+.table th:nth-child(2) {
+  width: 100%;
+}
+
+.table td,
+.table th {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.table th {
+  padding: 16px;
+  background-color: rgba(255, 255, 255, 0.1);
+  font-size: 1.2rem;
 }
 
 @keyframes logo-spin {
