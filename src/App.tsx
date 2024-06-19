@@ -89,8 +89,8 @@ function App() {
 
     addTodo( todoInput )
       .then( () => {
-        fetchAndSetTodos();
         setTodoInput( '' );
+        fetchAndSetTodos();
       } )
       .catch( respError => {
         setAlertConfig( {
@@ -103,6 +103,9 @@ function App() {
           errorStatus: true,
           errorMessage: JSON.stringify( respError ),
         } );
+      } )
+      .finally( () => {
+        setLoading( false );
       } )
   };
 
@@ -144,11 +147,12 @@ function App() {
 
         <br />
 
+        <code>Actualizado 19/06/2024, 15:39</code>
         <div>
           <h2>Lista de todos</h2>
 
           <div style={{ display: 'flex', justifyContent: 'flex-end', }}>
-            <Button variant='text' onClick={ fetchAndSetTodos }>Actualizar</Button>
+            <Button variant='text' onClick={ fetchAndSetTodos } disabled={ loading }>Actualizar</Button>
           </div>
 
           <table className='table'>

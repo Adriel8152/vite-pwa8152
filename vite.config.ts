@@ -29,10 +29,10 @@ export default defineConfig({
               name: 'getQueueName',
               options: {
                 maxRetentionTime: 24 * 60,
-
-                onSync: async ({ queue }) => {
-                  document.querySelector('#root').innerHTML = JSON.stringify(queue);
-                },
+                
+                // onSync: async ({ queue }) => {
+                //   document.querySelector('#root').innerHTML = JSON.stringify(queue);
+                // },
               },
             },
           },
@@ -48,7 +48,9 @@ export default defineConfig({
               options: {
                 maxRetentionTime: 24 * 60, // En minutos
                 onSync: async ({ queue }) => {
-                  console.log({ post: queue });
+                  // Aquí puedes hacer lo que quieras con la cola de peticiones
+
+                  queue.replayRequests();
                 }
               }
             }
