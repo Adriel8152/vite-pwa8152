@@ -10,6 +10,10 @@ registerSW({
   immediate: true,
 });
 
+if('workbox' in self) {
+  console.log( { workbox: self['workbox'] } )
+}
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeProvider theme={ theme }>

@@ -67,7 +67,7 @@ if (!self.define) {
     });
   };
 }
-define(['./workbox-b5f7729d'], (function (workbox) { 'use strict';
+define(['./workbox-6c6e25a0'], (function (workbox) { 'use strict';
 
   self.skipWaiting();
   workbox.clientsClaim();
@@ -79,11 +79,33 @@ define(['./workbox-b5f7729d'], (function (workbox) { 'use strict';
    */
   workbox.precacheAndRoute([{
     "url": "index.html",
-    "revision": "0.q5mse6qe1t"
+    "revision": "0.4tq285jafug"
   }], {});
   workbox.cleanupOutdatedCaches();
   workbox.registerRoute(new workbox.NavigationRoute(workbox.createHandlerBoundToURL("index.html"), {
     allowlist: [/^\/$/]
   }));
+  workbox.registerRoute(/.*\/api\/.*/, new workbox.NetworkFirst({
+    plugins: [new workbox.BackgroundSyncPlugin("getQueueName", {
+      maxRetentionTime: 1440,
+      onSync: async ({
+        queue
+      }) => {
+        document.querySelector("#root").innerHTML = JSON.stringify(queue);
+      }
+    })]
+  }), 'GET');
+  workbox.registerRoute(/.*\/api\/.*/, new workbox.NetworkOnly({
+    plugins: [new workbox.BackgroundSyncPlugin("postQueueName", {
+      maxRetentionTime: 1440,
+      onSync: async ({
+        queue
+      }) => {
+        console.log(...oo_oo(`1163011359_51_18_51_46_4`, {
+          post: queue
+        }));
+      }
+    })]
+  }), 'POST');
 
 }));

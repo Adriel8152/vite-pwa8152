@@ -42,7 +42,7 @@ function App() {
 
     getAllTodos()
       .then( data => {
-        setTodos( data );
+        setTodos( data.reverse() );
       } )
       .catch( respError => {
         setAlertConfig( {
@@ -84,6 +84,8 @@ function App() {
 
       return;
     };
+
+    setLoading( true );
 
     addTodo( todoInput )
       .then( () => {
@@ -132,7 +134,7 @@ function App() {
 
       <div style={{ padding: 64 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <TextField label="Agregar un todo" variant="filled" color='primary' sx={{ width: '100%', }} fullWidth value={todoInput} onChange={ e => setTodoInput( e.target.value ) } />
+          <TextField label="Agregar un todo" variant="filled" color='primary' sx={{ width: '100%', }} fullWidth value={todoInput} onChange={ e => setTodoInput( e.target.value ) } onKeyDown={ (event) => event.key === 'Enter' && handleAddTodo() } />
           <Button variant="contained" onClick={ handleAddTodo }>Agregar</Button>
         </div>
 
@@ -144,6 +146,10 @@ function App() {
 
         <div>
           <h2>Lista de todos</h2>
+
+          <div style={{ display: 'flex', justifyContent: 'flex-end', }}>
+            <Button variant='text' onClick={ fetchAndSetTodos }>Actualizar</Button>
+          </div>
 
           <table className='table'>
             <thead>

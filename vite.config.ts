@@ -17,18 +17,25 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+
+
+        
         runtimeCaching: [{
-          handler: 'StaleWhileRevalidate',
+          handler: 'NetworkFirst',
           urlPattern: /.*\/api\/.*/,
           method: 'GET',
           options: {
             backgroundSync: {
               name: 'getQueueName',
               options: {
-                maxRetentionTime: 24 * 60
-              }
-            }
-          }
+                maxRetentionTime: 24 * 60,
+
+                onSync: async ({ queue }) => {
+                  document.querySelector('#root').innerHTML = JSON.stringify(queue);
+                },
+              },
+            },
+          },
         },
         {
           // Nueva configuración para peticiones POST
@@ -39,7 +46,10 @@ export default defineConfig({
             backgroundSync: {
               name: 'postQueueName', // Este nombre debe ser único
               options: {
-                maxRetentionTime: 24 * 60 // En minutos
+                maxRetentionTime: 24 * 60, // En minutos
+                onSync: async ({ queue }) => {
+                  console.log({ post: queue });
+                }
               }
             }
           }
